@@ -1,0 +1,23 @@
+{
+  "name": "blockchain-query-api",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["blockchain", "api", "natural-language", "sql", "x402", "base"],
+  "author": "Brian Yang",
+  "license": "ISC",
+  "description": "A pay-per-query API that converts natural language questions into SQL queries against Base blockchain data",
+  "dependencies": {
+    "@coinbase/coinbase-sdk": "^0.25.0",
+    "@coinbase/x402": "^0.5.0",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "openai": "^5.12.2"
+  }
+}
