@@ -15,10 +15,14 @@ class CDPSQLService {
         return;
       }
 
-      this.coinbase = new Coinbase({
+      // Configure the SDK globally first
+      Coinbase.configure({
         apiKeyName: process.env.CDP_API_KEY_NAME,
         privateKey: process.env.CDP_API_KEY_PRIVATE_KEY
       });
+      
+      // Don't instantiate Coinbase, just use the configured static methods
+      this.coinbase = true; // Mark as configured
     } catch (error) {
       console.error('Failed to initialize CDP client:', error);
     }
@@ -30,22 +34,16 @@ class CDPSQLService {
     }
 
     try {
-      const token = await this.coinbase.generateJWT();
-      
-      const response = await axios.post(
-        `${this.baseURL}/v2/data/query/run`,
-        { 
-          sql: sqlQuery,
-          format: 'json'
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          timeout: 30000
-        }
-      );
+      // Use the SDK's internal API client for authenticated requests
+      const apiClient = Coinbase.apiClients.data;
+      if (!apiClient) {
+        throw new Error('CDP Data API client not available');
+      }
+
+      const response = await apiClient.post('/v2/data/query/run', {
+        sql: sqlQuery,
+        format: 'json'
+      });
 
       return {
         result: response.data.result || response.data,

@@ -7,7 +7,14 @@
     "dev": "node --watch src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["blockchain", "api", "natural-language", "sql", "x402", "base"],
+  "keywords": [
+    "blockchain",
+    "api",
+    "natural-language",
+    "sql",
+    "x402",
+    "base"
+  ],
   "author": "Brian Yang",
   "license": "ISC",
   "description": "A pay-per-query API that converts natural language questions into SQL queries against Base blockchain data",
@@ -18,6 +25,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "openai": "^5.12.2"
   }
 }
